@@ -243,10 +243,6 @@ endif
 # Convert a short name like "sooner" into the path to the product
 # file defining that product.
 #
-INTERNAL_PRODUCT := $(call resolve-short-product-name, $(TARGET_PRODUCT))
-ifneq ($(current_product_makefile),$(INTERNAL_PRODUCT))
-$(error PRODUCT_NAME inconsistent in $(current_product_makefile) and $(INTERNAL_PRODUCT))
-endif
 current_product_makefile :=
 all_product_makefiles :=
 all_product_configs :=
