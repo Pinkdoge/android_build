@@ -229,10 +229,6 @@ ifeq ($(load_all_product_makefiles),true)
 # Import all product makefiles.
 $(call import-products, $(all_product_makefiles))
 else
-# Import just the current product.
-ifneq (1,$(words $(current_product_makefile)))
-$(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
-endif
 $(call import-products, $(current_product_makefile))
 endif  # Import all or just the current product makefile
 
