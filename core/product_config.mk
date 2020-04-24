@@ -222,13 +222,6 @@ ifeq ($(load_all_product_makefiles),true)
 # Import all product makefiles.
 $(call import-products, $(all_product_makefiles))
 else
-# Import just the current product.
-ifndef current_product_makefile
-$(error Can not locate config makefile for product "$(TARGET_PRODUCT)")
-endif
-ifneq (1,$(words $(current_product_makefile)))
-$(error Product "$(TARGET_PRODUCT)" ambiguous: matches $(current_product_makefile))
-endif
 $(call import-products, $(current_product_makefile))
 endif  # Import all or just the current product makefile
 
@@ -243,10 +236,6 @@ endif
 # Convert a short name like "sooner" into the path to the product
 # file defining that product.
 #
-INTERNAL_PRODUCT := $(call resolve-short-product-name, $(TARGET_PRODUCT))
-ifneq ($(current_product_makefile),$(INTERNAL_PRODUCT))
-$(error PRODUCT_NAME inconsistent in $(current_product_makefile) and $(INTERNAL_PRODUCT))
-endif
 current_product_makefile :=
 all_product_makefiles :=
 all_product_configs :=
@@ -264,7 +253,7 @@ PRODUCT_DEXPREOPT_SPEED_APPS := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_D
 PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK))
 
 # Find the device that this product maps to.
-TARGET_DEVICE := $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_DEVICE)
+TARGET_DEVICE := kiwi
 
 # Figure out which resoure configuration options to use for this
 # product.
